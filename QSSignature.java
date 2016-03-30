@@ -71,8 +71,10 @@ public class QSSignature {
         }
         if (dateStr.isEmpty()) {
             if (params != null) {
-                if (params.containsKey("X-QS-Date"))
+                if (params.containsKey("X-QS-Date")) {
                     dateStr = params.get("X-QS-Date");
+                    strToSign += "\n";
+                }
             }
         }
         if (dateStr.isEmpty()) {
