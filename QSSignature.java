@@ -77,16 +77,12 @@ public class QSSignature {
         }
         if (dateStr.isEmpty()) {
             if (headers != null) {
-                if (headers.containsKey("Date"))
+                if (headers.containsKey("Date")) {
                     dateStr = headers.get("Date");
+                    strToSign += "\n" + dateStr;
+                }
             }
         }
-        if (dateStr.isEmpty()) {
-            dateStr = DateTimeFormatter.RFC_1123_DATE_TIME.format(
-                ZonedDateTime.now(ZoneId.of("GMT"))
-            );
-        }
-        strToSign += "\n" + dateStr;
 
         // Generate signed headers.
         if (headers != null) {
@@ -187,3 +183,4 @@ public class QSSignature {
             System.out.print("Everything works fine\n");
     }
 }
+
