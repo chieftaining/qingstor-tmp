@@ -66,25 +66,10 @@ public class QSSignature {
         // Append request time as string
         String dateStr = "";
         if (headers != null) {
-            if (headers.containsKey("X-QS-Date"))
-                dateStr = headers.get("X-QS-Date");
+            if (headers.containsKey("Date"))
+                dateStr = headers.get("Date");
         }
-        if (dateStr.isEmpty()) {
-            if (params != null) {
-                if (params.containsKey("X-QS-Date")) {
-                    dateStr = params.get("X-QS-Date");
-                    strToSign += "\n";
-                }
-            }
-        }
-        if (dateStr.isEmpty()) {
-            if (headers != null) {
-                if (headers.containsKey("Date")) {
-                    dateStr = headers.get("Date");
-                    strToSign += "\n" + dateStr;
-                }
-            }
-        }
+        strToSign += "\n" + dateStr;
 
         // Generate signed headers.
         if (headers != null) {
